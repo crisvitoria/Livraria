@@ -17,12 +17,13 @@
     </div>
 
     <form action="cadautoresscript.php" method="post" class="w3-container">
+        <br>
         <label class="w3-text-teal"><b>Nome</b></label>
         <input class="w3-input w3-border w3-light-grey" type="text" name="nome" required>
-
+        <br>
         <label class="w3-text-teal"><b>E-mail</b></label>
         <input class="w3-input w3-border w3-light-grey" type="email" name="email" required>
-
+        <br>
         <label class="w3-text-teal"><b>Data de Nascimento</b></label>
         <input class="w3-input w3-border w3-light-grey" type="date" name="data_nascimento" required>
 

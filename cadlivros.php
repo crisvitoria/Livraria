@@ -30,6 +30,7 @@
     </div>
 
     <form action="cadlivrosscript.php" method="post" class="w3-container">
+        <br>
         <label class="w3-text-teal"><b>Titulo</b></label>
         <input class="w3-input w3-border w3-light-grey" type="text" name="titulo" required>
 

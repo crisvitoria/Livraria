@@ -340,6 +340,10 @@ video {
     padding-left: 14rem;
   }
 }
+
+.margendireita {
+  margin-right: 50px;
+}
 .invisible {
   visibility: hidden;
 }
