@@ -26,14 +26,15 @@
             echo '<div class="w3-panel w3-pale-green">
                     <p>Cadastro realizado com sucesso!</p>
                   </div>';
-            echo '<a class="w3-btn w3-blue-grey" name="inicio" href="index.php">Página Inicial</a>';
+            echo '<a class="w3-btn w3-blue-grey" href="cadautores.php">Novo Cadastro</a>';
+            echo ' <a class="w3-btn w3-blue-grey" href="index.php">Página Inicial</a>';
         }
         else
         {
             echo '<div class="w3-panel w3-pale-red">
                     <p>Cadastro não realizado!</p>
                   </div>';
-            echo '<a class="w3-btn w3-blue-grey" name="inicio" href="index.php">Página Inicial</a>';
+            echo '<a class="w3-btn w3-blue-grey" href="index.php">Página Inicial</a>';
         }
 
     }

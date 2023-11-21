@@ -13,9 +13,14 @@
     <?php
     include "conexaobanco.php";
 
+    //Query para trazer os generos
     $query = "SELECT * FROM genero";
-    $result = msqli_query($conexao,$query);
-    $row = msqli_fetch_assoc($result);
+    $result = mysqli_query($conexao,$query);
+
+
+    //Query para trazer os autores
+    $secquery = "SELECT id_autor, nome FROM autores";
+    $secresult = mysqli_query($conexao,$secquery);
     
     ?>
 
@@ -28,19 +33,47 @@
         <label class="w3-text-teal"><b>Titulo</b></label>
         <input class="w3-input w3-border w3-light-grey" type="text" name="titulo" required>
 
+        
+        <br>
+
+        <label class="w3-text-teal"><b>Data de Publicação</b></label>
+        <input class="w3-input w3-border w3-light-grey" type="date" name="data_publicacao" required>
+        <br>
         <label class="w3-text-teal"><b>Gênero</b></label>
-        <select class="w3-select" name="genero">
+        <select class="w3-select" name="genero" required>
             <option value="" disabled selected>Selecione</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <?php
+            if ($result) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $id_genero = $row['id_genero'];
+                    $nome_genero = $row['nome_genero'];
+                    echo '<option value='.$id_genero.'>'.$nome_genero.'</option>';
+                }
+            } else {
+                echo "Erro na consulta: " . mysqli_error($conexao);
+            }
+            
+            ?>>
         </select>
-        <br>
+        <br><br>
+        <label class="w3-text-teal"><b>Autor</b></label>
+        <select class="w3-select" name="autor" required>
+            <option value="" disabled selected>Selecione</option>
+            <?php
+            if ($result) {
+                while ($secrow = mysqli_fetch_assoc($secresult)) {
+                    $id_autor = $secrow['id_autor'];
+                    $nome = $secrow['nome'];
+                    echo '<option value='.$id_autor.'>'.$nome.'</option>';
+                }
+            } else {
+                echo "Erro na consulta: " . mysqli_error($conexao);
+            }
+            
+            ?>>
+        </select>
 
-        <label class="w3-text-teal"><b>Data de Nascimento</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="date" name="data_nascimento" required>
-
-        <br>
+        <br><br>
         <button class="w3-btn w3-blue-grey" name="cadastrar">Cadastrar</button>
         <button class="w3-btn w3-blue-grey" type = "reset">Limpar</button>
 
