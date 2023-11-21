@@ -27,8 +27,9 @@
         <input class="w3-input w3-border w3-light-grey" type="date" name="data_nascimento" required>
 
         <br>
-        <button class="w3-btn w3-blue-grey" name="cadastrar">Cadastrar</button>
+        <button class="w3-btn w3-blue-grey" name="cadastrar" target="_self" rel="next">Cadastrar</button>
         <button class="w3-btn w3-blue-grey" type = "reset">Limpar</button>
+        <a class="w3-btn w3-blue-grey" href="index.php" target="_self" rel="prev">Página Inicial</a>
 
     </form>
 
