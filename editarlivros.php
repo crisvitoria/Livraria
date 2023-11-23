@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Livros</title>
+    <title>Editar Livros</title>
     <link rel="shortcut icon" href="imagens/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -22,69 +22,70 @@
     //Query para trazer os autores
     $secquery = "SELECT id_autor, nome FROM autores ORDER BY nome";
     $secresult = mysqli_query($conexao,$secquery);
-    
+
 ?>
 
-    <!--id_livro	id_autor	titulo	fk_genero	data_publicacao	-->
-    <div class="w3-container w3-teal">
-        <h2>Consulta de Livros</h2>
-    </div>
+<!--id_livro	id_autor	titulo	fk_genero	data_publicacao	-->
+<div class="w3-container w3-teal">
+    <h2>Editar Livros</h2>
+</div>
 
-    <form method="post" class="w3-container">
-        <br>
-        <label class="w3-text-teal"><b>Titulo</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="titulo">
+<form method="post" class="w3-container">
+    <br>
+    <label class="w3-text-teal"><b>Titulo</b></label>
+    <input class="w3-input w3-border w3-light-grey" type="text" name="titulo">
 
-        
-        <br>
-
-        <label class="w3-text-teal"><b>Data de Publicação</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="date" name="data_publicacao">
-        <br>
-        <label class="w3-text-teal"><b>Gênero</b></label>
-        <select class="w3-select" name="genero">
-            <option value="" disabled selected>Selecione</option>
-            <?php
-            if ($result) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $id_genero = $row['id_genero'];
-                    $nome_genero = $row['nome_genero'];
-                    echo '<option value='.$id_genero.'>'.$nome_genero.'</option>';
-                }
-            } else {
-                echo "Erro na consulta: " . mysqli_error($conexao);
-            }
-            
-            ?>>
-        </select>
-        <br><br>
-        <label class="w3-text-teal"><b>Autor</b></label>
-        <select class="w3-select" name="autor">
-            <option value="" disabled selected>Selecione</option>
-            <?php
-            if ($result) {
-                while ($secrow = mysqli_fetch_assoc($secresult)) {
-                    $id_autor = $secrow['id_autor'];
-                    $nome = $secrow['nome'];
-                    echo '<option value='.$id_autor.'>'.$nome.'</option>';
-                }
-            } else {
-                echo "Erro na consulta: " . mysqli_error($conexao);
-            }
-            
-            ?>>
-        </select>
-
-        <br><br>
-        <button class="w3-btn w3-blue-grey" name="consultar">Consultar</button>
-        <button class="w3-btn w3-blue-grey" type = "reset">Limpar</button>
-        <a class="w3-btn w3-blue-grey" href="index.php" target="_self" rel="prev">Página Inicial</a>
-
-    </form>
-
-    <!--Resultado da pesquisa-->
-    <?php
     
+    <br>
+
+    <label class="w3-text-teal"><b>Data de Publicação</b></label>
+    <input class="w3-input w3-border w3-light-grey" type="date" name="data_publicacao">
+    <br>
+    <label class="w3-text-teal"><b>Gênero</b></label>
+    <select class="w3-select" name="genero">
+        <option value="" disabled selected>Selecione</option>
+        <?php
+        if ($result) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id_genero = $row['id_genero'];
+                $nome_genero = $row['nome_genero'];
+                echo '<option value='.$id_genero.'>'.$nome_genero.'</option>';
+            }
+        } else {
+            echo "Erro na consulta: " . mysqli_error($conexao);
+        }
+        
+        ?>>
+    </select>
+    <br><br>
+    <label class="w3-text-teal"><b>Autor</b></label>
+    <select class="w3-select" name="autor">
+        <option value="" disabled selected>Selecione</option>
+        <?php
+        if ($result) {
+            while ($secrow = mysqli_fetch_assoc($secresult)) {
+                $id_autor = $secrow['id_autor'];
+                $nome = $secrow['nome'];
+                echo '<option value='.$id_autor.'>'.$nome.'</option>';
+            }
+        } else {
+            echo "Erro na consulta: " . mysqli_error($conexao);
+        }
+        
+        ?>>
+    </select>
+
+    <br><br>
+    <button class="w3-btn w3-blue-grey" name="consultar">Consultar</button>
+    <button class="w3-btn w3-blue-grey" type = "reset">Limpar</button>
+    <a class="w3-btn w3-blue-grey" href="index.php" target="_self" rel="prev">Página Inicial</a>
+
+</form>
+
+
+<!--Resultado da pesquisa-->
+<?php
+
     if(isset($_POST['consultar']) || isset($_GET['pagina']) != null)
         {
         include "conexaobanco.php";
@@ -148,6 +149,7 @@
                         <th>Data da Publicação</th>
                         <th>Autor</th>
                         <th>Gênero</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>";
         
@@ -157,12 +159,14 @@
                 $data_publicacao = $row['data_publicacao'];
                 $autor = $row['nome'];
                 $genero = $row['nome_genero'];
+                $id = $row['id_livro'];
 
                 echo "<tr>
                         <td>$titulo</td>
                         <td>$data_publicacao</td>
                         <td>$autor</td>
                         <td>$genero</td>
+                        <td><a class='w3-button w3-black w3-round-large' href='editlivroscript.php?id=$id' role='button'>Editar</a></td>
                     </tr>";
             }
 
@@ -204,6 +208,6 @@
         }
 
     }
-    ?>
+?>
 </body>
 </html>
