@@ -23,17 +23,18 @@
         $dataGenero = $generoController->getAllController();
         
 
-        if (isset($_POST['consultar'])) {
+        if(isset($_POST['consultar']) || isset($_GET['pagina']) != null){
             
             $titulo = isset($_POST['titulo']) ? $_POST['titulo'] : '';
             $data_publicacao = isset($_POST['data_publicacao']) ? $_POST['data_publicacao'] : '';
             $genero = isset($_POST['genero']) ? $_POST['genero'] : '';
             $autor = isset($_POST['autor']) ? $_POST['autor'] : '';
+            $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : '1';
 
-            $resultados = $livroController->getLivroController($titulo, $data_publicacao, $genero, $autor);
+            $resultados = $livroController->getLivroController($titulo, $data_publicacao, $genero, $autor, $pagina, $resultados_por_pagina = 10);
 
-            $dataLivro = $resultados[0];
-            $countRows = $resultados[1];
+            $dataLivro = $resultados['livros'];
+            $countRows = $resultados['total'];
             
         } 
         
@@ -94,11 +95,8 @@
     <!--Resultado da pesquisa-->
     <?php
     
-    if(isset($_POST['consultar']))
-    {
- 
-        if ($countRows>0) 
-        {
+    if(isset($_POST['consultar']) || isset($_GET['pagina']) != null){
+        if ($countRows > 0) {
             echo "<div class='w3-container'>";
             echo "<h2>Livros Cadastrados</h2>";
             echo "<table class='w3-table-all w3-hoverable'>
@@ -110,6 +108,7 @@
                         <th>Gênero</th>
                     </tr>
                     </thead>";
+
             foreach ($dataLivro as $row)
             {
                 $titulo = $row['titulo'];
@@ -127,6 +126,14 @@
 
             echo "</table></div>";
             echo "</div><br>";
+
+            // Lógica para a paginação
+            $total_pages = ceil($countRows / $resultados_por_pagina);
+            echo "<div class='w3-bar'>";
+            for ($i = 1; $i <= $total_pages; $i++) {
+                echo "<a href='?pagina=$i' class='w3-bar-item w3-button'>$i</a>";
+            }
+            echo "</div>";
         }    
         else
         {

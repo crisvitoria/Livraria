@@ -7,7 +7,7 @@ class Conexao {
         $host = 'localhost';
         $dbName = 'livraria';
         $user = 'root';
-        $password  = 'Cris748997.';
+        $password  = '';
 
         
         try {

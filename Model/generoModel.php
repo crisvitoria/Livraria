@@ -11,6 +11,7 @@
             $this->conex = new Conexao();
         }
 
+        //Essa função irá buscar todos os gêneros, ordenado alfabéticamente pelo nome
         function getAllModel ()
         {
             try
@@ -37,7 +38,6 @@
             {
                 throw new Exception('Erro ao carregar o produto: ' . $ex->getMessage());
             }
-
         }
     }
 ?>

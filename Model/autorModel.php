@@ -11,6 +11,8 @@ class AutorModel
         $this->conex = new Conexao();
     }
 
+    
+    
     function getAllModel ()
     {
         try

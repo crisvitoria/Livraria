@@ -11,17 +11,19 @@ class livroController
         $this->livroModel = new LivroModel();
     }
 
-    function getLivroController($titulo, $data_publicacao, $genero, $autor)
+    function getLivroController($titulo, $data_publicacao, $genero, $autor, $pagina, $resultados_por_pagina)
     {
         try
         {
-            $livroModel = $this->livroModel->getLivroModel($titulo, $data_publicacao, $genero, $autor);
+            $livroModel = $this->livroModel->getLivroModel($titulo, $data_publicacao, $genero, $autor, $pagina, $resultados_por_pagina);
             return $livroModel;
         }
         catch (Exception $e) {
             return ['success' => false, 'message' => $e->getMessage()];
         }
     }
+
 }
+    
 
 ?>
